@@ -13,8 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration  
 @EnableWebSecurity
 public class SecurityConfig {
-
-	@Bean SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	@Bean
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((authorize) -> authorize
 				.anyRequest().authenticated()
@@ -25,7 +25,8 @@ public class SecurityConfig {
 		return http.build();
 	}
 
-	@Bean UserDetailsService userDetailsService() {
+	@Bean
+	UserDetailsService userDetailsService() {
 		UserDetails userDetails = User.withDefaultPasswordEncoder()
 			.username("craig")
 			.password("chocolate")
@@ -34,5 +35,4 @@ public class SecurityConfig {
 
 		return new InMemoryUserDetailsManager(userDetails);
 	}
-
 }
