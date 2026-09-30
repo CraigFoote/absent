@@ -10,7 +10,10 @@ A REST service with two endpoints designed to facilitate testing server redirect
 
 ## Running
 
-Check out, build and run this Spring Boot application. Then in a console:
+Check out, build and run this Spring Boot application. Then open in a browser: [swagger](http://localhost:8080/swagger-ui/index.html)
+
+
+Or in a console:
 
 ### `/{name}`
 

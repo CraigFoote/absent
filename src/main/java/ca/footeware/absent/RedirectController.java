@@ -22,13 +22,15 @@ public class RedirectController {
 	 * @param request {@link HttpServletRequest}
 	 */
 	private void checkRequestHeaders(HttpServletRequest request) {
-		System.out.println(request.getAuthType());
+		System.out.println("-------request headers-----------------");
+		System.out.println("AuthType=" + request.getAuthType());
 		Enumeration<String> headerNames = request.getHeaderNames();
 		while (headerNames.hasMoreElements()) {
 			String key = headerNames.nextElement();
 			String value = request.getHeader(key);
 			System.out.println(key + "=" + value);
 		}
+		System.out.println("---------------------------------------");
 	}
 
 	/**
