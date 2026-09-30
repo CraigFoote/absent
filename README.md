@@ -1,41 +1,51 @@
 # absent
 
-A REST service with two endpoints designed to facilitate testing server redirect.
+A REST service with two endpoints designed to facilitate testing server redirect and basic authentication.
 
-## Features
+## End Points
 
 1. `/name/{name}` : Returns a `301 Moved Permanently` status with `Location` header set to `/name/redirect/{name}`.
+
 1. `/name/redirect/{name}` : Returns a `200 OK` status with content `{name}`.
-1. Basic authorization was added making the endpoints above password-protected.
+
+1. Basic authentication was added making the endpoints above password-protected (username is `spring` and password is `boot`).
 
 ## Running
 
-Check out, build and run this Spring Boot application. Then open in a browser: [swagger](http://localhost:8080/swagger-ui/index.html)
+Check out, build and run this Spring Boot application. Then open this page in a browser: [swagger](http://localhost:8080/swagger-ui/index.html).
 
 
 Or in a console:
 
-### `/{name}`
+### `/name/{name}`
 
 ``` bash
-❯ curl -v http://localhost:8080/name/bob
+❯ curl -v -u spring:boot http://localhost:8080/name/bob
 * Host localhost:8080 was resolved.
 * IPv6: ::1
 * IPv4: 127.0.0.1
 *   Trying [::1]:8080...
-* Established connection to localhost (::1 port 8080) from ::1 port 34068 
+* Established connection to localhost (::1 port 8080) from ::1 port 54526 
 * using HTTP/1.x
-> GET /bob HTTP/1.1
+* Server auth using Basic with user 'spring'
+> GET /name/bob HTTP/1.1
 > Host: localhost:8080
+> Authorization: Basic c3ByaW5nOmJvb3Q=
 > User-Agent: curl/8.18.0
 > Accept: */*
 > 
 * Request completely sent off
 < HTTP/1.1 301 
 < Location: /name/redirect/bob
+< X-Content-Type-Options: nosniff
+< X-XSS-Protection: 0
+< Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+< Pragma: no-cache
+< Expires: 0
+< X-Frame-Options: DENY
 < Content-Language: en-CA
 < Content-Length: 0
-< Date: Wed, 22 Jul 2026 20:18:32 GMT
+< Date: Wed, 30 Sep 2026 02:19:30 GMT
 < 
 * Connection #0 to host localhost:8080 left intact
 ```
@@ -50,23 +60,31 @@ Location: /name/redirect/bob
 ### `/name/redirect/{name}`
 
 ``` bash
-❯ curl -v http://localhost:8080/name/redirect/bob
+❯ curl -v -u spring:boot http://localhost:8080/name/redirect/bob
 * Host localhost:8080 was resolved.
 * IPv6: ::1
 * IPv4: 127.0.0.1
 *   Trying [::1]:8080...
-* Established connection to localhost (::1 port 8080) from ::1 port 48088 
+* Established connection to localhost (::1 port 8080) from ::1 port 38614 
 * using HTTP/1.x
+* Server auth using Basic with user 'spring'
 > GET /name/redirect/bob HTTP/1.1
 > Host: localhost:8080
+> Authorization: Basic c3ByaW5nOmJvb3Q=
 > User-Agent: curl/8.18.0
 > Accept: */*
 > 
 * Request completely sent off
 < HTTP/1.1 200 
+< X-Content-Type-Options: nosniff
+< X-XSS-Protection: 0
+< Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+< Pragma: no-cache
+< Expires: 0
+< X-Frame-Options: DENY
 < Content-Type: text/plain;charset=UTF-8
 < Content-Length: 3
-< Date: Wed, 22 Jul 2026 20:19:15 GMT
+< Date: Wed, 30 Sep 2026 02:24:03 GMT
 < 
 * Connection #0 to host localhost:8080 left intact
 bob
